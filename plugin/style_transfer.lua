@@ -7,5 +7,5 @@ vim.api.nvim_create_user_command("TransferMixedCase", function()
 end, {})
 
 vim.api.nvim_create_user_command("TransferStrCase", function(args)
-	require("style_transfer.transfer").TransferStrCase(args[1])
+	require("style_transfer.transfer").TransferStrCase(args.fargs[1])
 end, { nargs = 1 })
