@@ -83,23 +83,3 @@ function M.TransferMixedCase()
 end
 
 return M
-
--- -- stylua: ignore
--- local keymapTable = {
---   { mode = "n", key = "crc", func = function() TransferCamelCase()  end },
---   { mode = "x", key = "rc",  func = function() TransferCamelCase()  end },
---   { mode = "n", key = "crm", func = function() TransferMixedCase()  end },
---   { mode = "x", key = "rm",  func = function() TransferMixedCase()  end },
---   { mode = "n", key = "crs", func = function() TransferStrCase("_") end },
---   { mode = "x", key = "rs",  func = function() TransferStrCase("_") end },
---   { mode = "n", key = "cr-", func = function() TransferStrCase("-") end },
---   { mode = "x", key = "r-",  func = function() TransferStrCase("-") end },
---   { mode = "n", key = "cr ", func = function() TransferStrCase(" ") end },
---   { mode = "x", key = "r ",  func = function() TransferStrCase(" ") end },
---   { mode = "n", key = "cr.", func = function() TransferStrCase(".") end },
---   { mode = "x", key = "r.",  func = function() TransferStrCase(".") end },
--- }
---
--- for _, mapping in ipairs(keymapTable) do
--- 	vim.keymap.set(mapping.mode, mapping.key, mapping.func)
--- end
