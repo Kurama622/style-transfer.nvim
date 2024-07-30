@@ -1,10 +1,10 @@
 local M = {}
 
-function M.setup()
-	local stt = require("style_transfer.transfer")
+local stt = require("style_transfer.transfer")
 
+local defaults = {
   -- stylua: ignore
-  local keymapTable = {
+  keys = {
     { mode = "n", key = "crc", func = function() stt.TransferCamelCase()  end },
     { mode = "x", key = "rc",  func = function() stt.TransferCamelCase()  end },
     { mode = "n", key = "crm", func = function() stt.TransferMixedCase()  end },
@@ -18,8 +18,13 @@ function M.setup()
     { mode = "n", key = "cr.", func = function() stt.TransferStrCase(".") end },
     { mode = "x", key = "r.",  func = function() stt.TransferStrCase(".") end },
   }
+,
+}
 
-	for _, mapping in ipairs(keymapTable) do
+function M.setup(opts)
+	local conf = vim.tbl_deep_extend("force", defaults, opts or defaults)
+
+	for _, mapping in ipairs(conf.keys) do
 		vim.keymap.set(mapping.mode, mapping.key, mapping.func)
 	end
 end
