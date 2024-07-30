@@ -22,28 +22,28 @@ end
 function M.TransferStrCase(str)
 	local pos = TransferInit()
 	local selection = GetVisualSelection()
-	local result = ""
+	local new_string = ""
 
 	for i = 1, #selection do
 		local char = selection:sub(i, i)
 
 		if char:match("%u") or char:match("%W") then
 			if i > 1 then
-				if result:sub(-1, -1) ~= str then
-					result = result .. str
+				if new_string:sub(-1, -1) ~= str then
+					new_string = new_string .. str
 				end
 			end
 			if char:match("%u") then
-				result = result .. char:lower()
+				new_string = new_string .. char:lower()
 			elseif not char:match("%W") then
-				result = result .. char
+				new_string = new_string .. char
 			end
 		else
-			result = result .. char
+			new_string = new_string .. char
 		end
 	end
 
-	vim.cmd("%s/" .. selection .. "/" .. result .. "/g")
+	vim.cmd("%s/\\<" .. selection .. "\\>/" .. new_string .. "/g")
 	vim.api.nvim_win_set_cursor(0, { pos[2], pos[3] })
 end
 
@@ -61,7 +61,7 @@ function M.TransferCamelCase()
 	end
 
 	local new_string = table.concat(parts)
-	vim.cmd("%s/" .. selection .. "/" .. new_string .. "/g")
+	vim.cmd("%s/\\<" .. selection .. "\\>/" .. new_string .. "/g")
 	vim.api.nvim_win_set_cursor(0, { pos[2], pos[3] })
 end
 
@@ -78,7 +78,7 @@ function M.TransferMixedCase()
 	end
 
 	local new_string = table.concat(parts)
-	vim.cmd("%s/" .. selection .. "/" .. new_string .. "/g")
+	vim.cmd("%s/\\<" .. selection .. "\\>/" .. new_string .. "/g")
 	vim.api.nvim_win_set_cursor(0, { pos[2], pos[3] })
 end
 
