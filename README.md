@@ -16,7 +16,30 @@ Use default key mappings
     require("style_transfer").setup({})
   end,
 },
+```
+Custom key mappings
 
+```lua
+{
+  "StubbornVegeta/style-transfer.nvim",
+  event = "BufEnter",
+  config = function()
+    require("style_transfer").setup({
+      keys = {
+        { key = "crc", mode = "n", func = "<cmd>TransferCamelCase<cr>" },
+        { key = "crm", mode = "n", func = "<cmd>TransferMixedCase<cr>" },
+        { key = "cr_", mode = "n", func = "<cmd>TransferStrCase _<cr>" },
+        { key = "cr-", mode = "n", func = "<cmd>TransferStrCase -<cr>" },
+        { key = "cr.", mode = "n", func = "<cmd>TransferStrCase .<cr>" },
+        { key = "rc", mode = "x", func = "<cmd>TransferCamelCase<cr>" },
+        { key = "rm", mode = "x", func = "<cmd>TransferMixedCase<cr>" },
+        { key = "r_", mode = "x", func = "<cmd>TransferStrCase _<cr>" },
+        { key = "r-", mode = "x", func = "<cmd>TransferStrCase -<cr>" },
+        { key = "r.", mode = "x", func = "<cmd>TransferStrCase .<cr>" },
+      },
+    })
+  end,
+},
 ```
 
 Lazy load and custom key mappings
