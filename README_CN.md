@@ -1,14 +1,14 @@
 # Style Transfer
 
-**[ENGLISH](README.md)** | [简体中文](README_CN.md)
+[ENGLISH](README.md) | **[简体中文](README_CN.md)**
 
-A variable naming style conversion plugin that can switch between styles such as camel case, pascal case, and snake case.
+变量命名风格的转换插件，可以在驼峰命名、混合命名和蛇形命名等风格之间相互转换
 
-## Configuration
+## 配置
 
 - lazy.nvim
 
-Use default key mappings
+使用默认快捷键
 
 ```lua
 {
@@ -19,7 +19,7 @@ Use default key mappings
   end,
 },
 ```
-Custom key mappings
+自定义快捷键
 
 ```lua
 {
@@ -44,7 +44,7 @@ Custom key mappings
 },
 ```
 
-Lazy load and custom key mappings
+懒加载并自定义快捷键
 
 ```lua
 {
@@ -68,7 +68,7 @@ Lazy load and custom key mappings
 },
 ```
 
-## Default Key Mapping
+## 默认快捷键
 
 | Key | Mode |   Description  |
 |-----|------|----------------|
@@ -85,9 +85,9 @@ Lazy load and custom key mappings
 | `r.`  |   `x`  |   to dot.case  |
 | `r `  |   `x`  |  to space case |
 
-## More
+## 更多探索功能
 
-`TransferStrCase` function allows you to customize more operations, such as:
+`TransferStrCase` 函数允许你自定义更多操作, 比如:
 ``` lua
 keys = {
   { "r ", mode = "x", "<cmd>TransferStrCase \\ <cr>" }, -- HelloWorld -> hello world
