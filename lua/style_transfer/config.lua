@@ -22,11 +22,11 @@ local defaults = {
 }
 
 function M.setup(opts)
-	local conf = vim.tbl_deep_extend("force", defaults, opts or {})
+  local conf = vim.tbl_deep_extend("force", defaults, opts or {})
 
-	for _, mapping in ipairs(conf.keys) do
-		vim.keymap.set(mapping.mode, mapping.key, mapping.func)
-	end
+  for _, mapping in ipairs(conf.keys) do
+    vim.keymap.set(mapping.mode, mapping.key, mapping.func)
+  end
 end
 
 return M
