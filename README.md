@@ -12,7 +12,7 @@ Use default key mappings
 
 ```lua
 {
-  "StubbornVegeta/style-transfer.nvim",
+  "Kurama622/style-transfer.nvim",
   event = "BufEnter",
   config = function()
     require("style_transfer").setup({})
@@ -23,7 +23,7 @@ Custom key mappings
 
 ```lua
 {
-  "StubbornVegeta/style-transfer.nvim",
+  "Kurama622/style-transfer.nvim",
   event = "BufEnter",
   config = function()
     require("style_transfer").setup({
@@ -48,7 +48,7 @@ Lazy load and custom key mappings
 
 ```lua
 {
-  "StubbornVegeta/style-transfer.nvim",
+  "Kurama622/style-transfer.nvim",
   cmd = { "TransferCamelCase", "TransferMixedCase", "TransferStrCase" },
   config = function()
     require("style_transfer").setup()

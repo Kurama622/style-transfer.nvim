@@ -12,7 +12,7 @@
 
 ```lua
 {
-  "StubbornVegeta/style-transfer.nvim",
+  "Kurama622/style-transfer.nvim",
   event = "BufEnter",
   config = function()
     require("style_transfer").setup({})
@@ -23,7 +23,7 @@
 
 ```lua
 {
-  "StubbornVegeta/style-transfer.nvim",
+  "Kurama622/style-transfer.nvim",
   event = "BufEnter",
   config = function()
     require("style_transfer").setup({
@@ -48,7 +48,7 @@
 
 ```lua
 {
-  "StubbornVegeta/style-transfer.nvim",
+  "Kurama622/style-transfer.nvim",
   cmd = { "TransferCamelCase", "TransferMixedCase", "TransferStrCase" },
   config = function()
     require("style_transfer").setup()
