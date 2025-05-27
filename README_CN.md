@@ -28,16 +28,18 @@
   config = function()
     require("style_transfer").setup({
       keys = {
-        { key = "crc", mode = "n", func = "<cmd>TransferCamelCase<cr>" },
-        { key = "crm", mode = "n", func = "<cmd>TransferMixedCase<cr>" },
-        { key = "cr_", mode = "n", func = "<cmd>TransferStrCase _<cr>" },
-        { key = "cr-", mode = "n", func = "<cmd>TransferStrCase -<cr>" },
-        { key = "cr.", mode = "n", func = "<cmd>TransferStrCase .<cr>" },
-        { key = "rc", mode = "x", func = "<cmd>TransferCamelCase<cr>" },
-        { key = "rm", mode = "x", func = "<cmd>TransferMixedCase<cr>" },
-        { key = "r_", mode = "x", func = "<cmd>TransferStrCase _<cr>" },
-        { key = "r-", mode = "x", func = "<cmd>TransferStrCase -<cr>" },
-        { key = "r.", mode = "x", func = "<cmd>TransferStrCase .<cr>" },
+        { "crc", mode = "n", "<cmd>TransferCamelCase<cr>", desc = "namingStyle" },
+        { "crm", mode = "n", "<cmd>TransferMixedCase<cr>", desc = "NamingStyle" },
+        { "cr_", mode = "n", "<cmd>TransferStrCase _<cr>", desc = "naming_style" },
+        { "cr-", mode = "n", "<cmd>TransferStrCase -<cr>", desc = "naming-style" },
+        { "cr.", mode = "n", "<cmd>TransferStrCase .<cr>", desc = "naming.style" },
+        { "cr ", mode = "n", "<cmd>TransferStrCase \\ <cr>", desc = "nameing style" },
+        { "<leader>rc", mode = "x", "<cmd>TransferCamelCase<cr>", desc = "namingStyle" },
+        { "<leader>rm", mode = "x", "<cmd>TransferMixedCase<cr>", desc = "NamingStyle" },
+        { "<leader>r_", mode = "x", "<cmd>TransferStrCase _<cr>", desc = "naming_style" },
+        { "<leader>r-", mode = "x", "<cmd>TransferStrCase -<cr>", desc = "naming-style" },
+        { "<leader>r.", mode = "x", "<cmd>TransferStrCase .<cr>", desc = "naming.style" },
+        { "<leader>r ", mode = "x", "<cmd>TransferStrCase \\ <cr>", desc = "naming style" },
       },
     })
   end,
@@ -54,16 +56,18 @@
     require("style_transfer").setup()
   end,
   keys = {
-    { "crc", mode = "n", "<cmd>TransferCamelCase<cr>" },
-    { "crm", mode = "n", "<cmd>TransferMixedCase<cr>" },
-    { "cr_", mode = "n", "<cmd>TransferStrCase _<cr>" },
-    { "cr-", mode = "n", "<cmd>TransferStrCase -<cr>" },
-    { "cr.", mode = "n", "<cmd>TransferStrCase .<cr>" },
-    { "rc", mode = "x", "<cmd>TransferCamelCase<cr>" },
-    { "rm", mode = "x", "<cmd>TransferMixedCase<cr>" },
-    { "r_", mode = "x", "<cmd>TransferStrCase _<cr>" },
-    { "r-", mode = "x", "<cmd>TransferStrCase -<cr>" },
-    { "r.", mode = "x", "<cmd>TransferStrCase .<cr>" },
+    { "crc", mode = "n", "<cmd>TransferCamelCase<cr>", desc = "namingStyle" },
+    { "crm", mode = "n", "<cmd>TransferMixedCase<cr>", desc = "NamingStyle" },
+    { "cr_", mode = "n", "<cmd>TransferStrCase _<cr>", desc = "naming_style" },
+    { "cr-", mode = "n", "<cmd>TransferStrCase -<cr>", desc = "naming-style" },
+    { "cr.", mode = "n", "<cmd>TransferStrCase .<cr>", desc = "naming.style" },
+    { "cr ", mode = "n", "<cmd>TransferStrCase \\ <cr>", desc = "nameing style" },
+    { "<leader>rc", mode = "x", "<cmd>TransferCamelCase<cr>", desc = "namingStyle" },
+    { "<leader>rm", mode = "x", "<cmd>TransferMixedCase<cr>", desc = "NamingStyle" },
+    { "<leader>r_", mode = "x", "<cmd>TransferStrCase _<cr>", desc = "naming_style" },
+    { "<leader>r-", mode = "x", "<cmd>TransferStrCase -<cr>", desc = "naming-style" },
+    { "<leader>r.", mode = "x", "<cmd>TransferStrCase .<cr>", desc = "naming.style" },
+    { "<leader>r ", mode = "x", "<cmd>TransferStrCase \\ <cr>", desc = "naming style" },
   },
 },
 ```
@@ -78,19 +82,19 @@
 | `cr-` |   `n`  |  to dash-case  |
 | `cr.` |   `n`  |   to dot.case  |
 | `cr ` |   `n`  |  to space case |
-| `rc`  |   `x`  |  to camelCase  |
-| `rm`  |   `x`  |  to PascalCase |
-| `rs`  |   `x`  |  to snake_case |
-| `r-`  |   `x`  |  to dash-case  |
-| `r.`  |   `x`  |   to dot.case  |
-| `r `  |   `x`  |  to space case |
+| `<leader>rc`  |   `x`  |  to camelCase  |
+| `<leader>rm`  |   `x`  |  to PascalCase |
+| `<leader>rs`  |   `x`  |  to snake_case |
+| `<leader>r-`  |   `x`  |  to dash-case  |
+| `<leader>r.`  |   `x`  |   to dot.case  |
+| `<leader>r `  |   `x`  |  to space case |
 
 ## 更多探索功能
 
 `TransferStrCase` 函数允许你自定义更多操作, 比如:
 ``` lua
 keys = {
-  { "r ", mode = "x", "<cmd>TransferStrCase \\ <cr>" }, -- HelloWorld -> hello world
-  { "r|", mode = "x", "<cmd>TransferStrCase \\ | <cr>" }, -- HelloWorld -> hello | world
+  { "<leader>r ", mode = "x", "<cmd>TransferStrCase \\ <cr>" }, -- HelloWorld -> hello world
+  { "<leader>r|", mode = "x", "<cmd>TransferStrCase \\ | <cr>" }, -- HelloWorld -> hello | world
 }
 ```

@@ -1,85 +1,90 @@
-local M = {}
+local M = {
+  mode = "n",
+  pos = "",
+  _origin_str = "",
+  _new_str = "",
+}
+
 local function TransferInit()
   return vim.fn.getpos(".")
 end
 
-local function GetVisualSelection()
-  if vim.fn.mode() ~= "v" and vim.fn.mode() ~= "x" then
-    vim.cmd("noau normal! viw")
-  end
-  vim.cmd('noau normal! "vy"')
-  local text = vim.fn.getreg("v")
-  vim.fn.setreg("v", {})
+local function split_identifier(str)
+  local words = {}
 
-  text = string.gsub(text, "\n", "")
-  if #text > 0 then
-    return text
-  else
-    return ""
+  str = str:gsub("([a-z])([A-Z])", "%1 %2")
+  str = str:gsub("([A-Z]+)([A-Z][a-z])", "%1 %2")
+
+  str = str:gsub("[-_.]", " ")
+
+  for word in str:gmatch("%S+") do
+    table.insert(words, word:lower())
   end
+
+  return words
 end
 
-function M.TransferStrCase(str)
-  local pos = TransferInit()
-  local selection = GetVisualSelection()
-  local new_string = ""
+function M:Replace()
+  if self.mode == "n" then
+    vim.lsp.buf.rename(self._new_str)
+  else
+    vim.cmd("%s/\\<" .. self._origin_str .. "\\>/" .. self._new_str .. "/g")
+    vim.api.nvim_win_set_cursor(0, { self.pos[2], self.pos[3] })
+  end
+  self._new_str = ""
+end
 
-  for i = 1, #selection do
-    local char = selection:sub(i, i)
+function M:GetVisualSelection()
+  self.mode = vim.fn.mode()
+  self.pos = TransferInit()
+  if self.mode == "n" then
+    return vim.fn.expand("<cword>")
+  else
+    vim.cmd('noau normal! "vy"')
+    local text = vim.fn.getreg("v")
+    vim.fn.setreg("v", {})
 
-    if char:match("%u") or char:match("%W") then
-      if i > 1 then
-        if new_string:sub(-1, -1) ~= str then
-          new_string = new_string .. str
-        end
-      end
-      if char:match("%u") then
-        new_string = new_string .. char:lower()
-      elseif not char:match("%W") then
-        new_string = new_string .. char
-      end
+    text = string.gsub(text, "\n", "")
+    if #text > 0 then
+      return text
     else
-      new_string = new_string .. char
+      return ""
     end
   end
-
-  vim.cmd("%s/\\<" .. selection .. "\\>/" .. new_string .. "/g")
-  vim.api.nvim_win_set_cursor(0, { pos[2], pos[3] })
 end
 
-function M.TransferCamelCase()
-  local pos = TransferInit()
-  local selection = GetVisualSelection()
-  local parts = {}
-  for part in selection:gmatch("%w+") do
-    table.insert(parts, part)
-  end
+function M:TransferStrCase(separator)
+  separator = separator or "_"
+  self._origin_str = self:GetVisualSelection()
+  local words = split_identifier(self._origin_str)
 
-  parts[1] = parts[1]:lower()
+  self._new_str = table.concat(words, separator)
+  self:Replace()
+end
+
+function M:TransferCamelCase()
+  self._origin_str = self:GetVisualSelection()
+  local parts = split_identifier(self._origin_str)
+
+  parts[1] = parts[1]:sub(1, 1):lower() .. parts[1]:sub(2)
   for i = 2, #parts do
     parts[i] = parts[i]:sub(1, 1):upper() .. parts[i]:sub(2):lower()
   end
 
-  local new_string = table.concat(parts)
-  vim.cmd("%s/\\<" .. selection .. "\\>/" .. new_string .. "/g")
-  vim.api.nvim_win_set_cursor(0, { pos[2], pos[3] })
+  self._new_str = table.concat(parts)
+  self:Replace()
 end
 
-function M.TransferMixedCase()
-  local pos = TransferInit()
-  local selection = GetVisualSelection()
-  local parts = {}
-  for part in selection:gmatch("%w+") do
-    table.insert(parts, part)
-  end
+function M:TransferMixedCase()
+  self._origin_str = self:GetVisualSelection()
+  local parts = split_identifier(self._origin_str)
 
   for i = 1, #parts do
     parts[i] = parts[i]:sub(1, 1):upper() .. parts[i]:sub(2):lower()
   end
 
-  local new_string = table.concat(parts)
-  vim.cmd("%s/\\<" .. selection .. "\\>/" .. new_string .. "/g")
-  vim.api.nvim_win_set_cursor(0, { pos[2], pos[3] })
+  self._new_str = table.concat(parts)
+  self:Replace()
 end
 
 return M
